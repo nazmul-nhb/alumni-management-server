@@ -1,6 +1,6 @@
 {
 	"name": "alumni-management-server",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "Server for Alumni Management System",
 	"main": "dist/server.js",
 	"scripts": {
@@ -14,7 +14,7 @@
 		"fix": "node scripts/fix.mjs",
 		"commit": "node scripts/commit.mjs",
 		"count": "node scripts/count.mjs",
-		"module": "node scripts/module.mjs",
+		"module": "node scripts/module.cjs",
 		"secret": "node scripts/secret.mjs"
 	},
 	"keywords": [
@@ -69,7 +69,7 @@
 		"jsonwebtoken": "^9.0.2",
 		"mongoose": "^8.15.0",
 		"multer": "^2.0.0",
-		"nhb-toolbox": "^4.10.67",
+		"nhb-toolbox": "^4.10.73",
 		"zod": "^3.25.23"
 	}
 }

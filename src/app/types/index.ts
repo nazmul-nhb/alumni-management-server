@@ -1,7 +1,7 @@
 import type { Types } from 'mongoose';
 import type { STATUS_CODES, USER_ROLES } from '../constants';
 
-export type TCollection = 'N/A' | 'User' | 'Expense' | 'Meal';
+export type TCollection = 'N/A' | 'User' | 'Alumni';
 
 export type TMethod =
 	| 'GET'
