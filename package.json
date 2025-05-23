@@ -1,11 +1,14 @@
 {
 	"name": "alumni-management-server",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "Server for Alumni Management System",
 	"main": "dist/server.js",
 	"scripts": {
 		"clean": "rimraf dist",
 		"build": "node scripts/build.mjs",
+		"dev": "nodemon",
+		"deploy": "node scripts/build.mjs && vercel --prod",
+		"start": "node dist/server.js",
 		"format": "prettier --write .",
 		"lint": "node scripts/lint.mjs",
 		"fix": "node scripts/fix.mjs",
