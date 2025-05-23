@@ -1,9 +1,9 @@
 // @ts-check
 
-import chalk from "chalk";
-import fs from "fs/promises";
-import { capitalizeString } from "nhb-toolbox";
-import readline from "readline/promises";
+import chalk from 'chalk';
+import fs from 'fs/promises';
+import { capitalizeString } from 'nhb-toolbox';
+import readline from 'readline/promises';
 
 /**
  * * Create a list of folder/filenames for a module.
@@ -11,10 +11,10 @@ import readline from "readline/promises";
  * @returns A list of filenames in an array of objects.
  */
 const fileList = (module) => {
-    return [
-        {
-            name: `${module}.routes.ts`,
-            content: `
+	return [
+		{
+			name: `${module}.routes.ts`,
+			content: `
 import { Router } from 'express';
 import { ${module}Controllers } from './${module}.controllers';
 
@@ -24,10 +24,10 @@ router.get('/', ${module}Controllers.getAll${capitalizeString(module)}s);
 
 export const ${module}Routes = router;
             `,
-        },
-        {
-            name: `${module}.controllers.ts`,
-            content: `
+		},
+		{
+			name: `${module}.controllers.ts`,
+			content: `
 import catchAsync from '../../utilities/catchAsync';
 import sendResponse from '../../utilities/sendResponse';
 import { ${module}Services } from './${module}.services';
@@ -40,10 +40,10 @@ const getAll${capitalizeString(module)}s = catchAsync(async (_req, res) => {
 
 export const ${module}Controllers = { getAll${capitalizeString(module)}s };
             `,
-        },
-        {
-            name: `${module}.services.ts`,
-            content: `
+		},
+		{
+			name: `${module}.services.ts`,
+			content: `
 import { QueryBuilder } from '../../classes/QueryBuilder';
 import { ${capitalizeString(module)} } from './${module}.model';
 
@@ -58,10 +58,10 @@ const getAll${capitalizeString(module)}sFromDB = async (query?: Record<string, u
 
 export const ${module}Services = { getAll${capitalizeString(module)}sFromDB };
             `,
-        },
-        {
-            name: `${module}.model.ts`,
-            content: `
+		},
+		{
+			name: `${module}.model.ts`,
+			content: `
 import { Schema, model } from 'mongoose';
 import type { I${capitalizeString(module)}Doc } from './${module}.types';
 
@@ -77,10 +77,10 @@ const ${module}Schema = new Schema<I${capitalizeString(module)}Doc>(
 
 export const ${capitalizeString(module)} = model<I${capitalizeString(module)}Doc>('${capitalizeString(module)}', ${module}Schema);
             `,
-        },
-        {
-            name: `${module}.validation.ts`,
-            content: `
+		},
+		{
+			name: `${module}.validation.ts`,
+			content: `
 import { z } from 'zod';
 
 const creationSchema = z
@@ -89,10 +89,10 @@ const creationSchema = z
 
 export const ${module}Validations = { creationSchema };
             `,
-        },
-        {
-            name: `${module}.types.ts`,
-            content: `
+		},
+		{
+			name: `${module}.types.ts`,
+			content: `
 import type { Document, Types } from 'mongoose';
 
 export interface I${capitalizeString(module)} {
@@ -104,8 +104,8 @@ export interface I${capitalizeString(module)}Doc extends I${capitalizeString(mod
 	_id: Types.ObjectId;
 }
             `,
-        },
-    ];
+		},
+	];
 };
 
 /**
@@ -113,43 +113,51 @@ export interface I${capitalizeString(module)}Doc extends I${capitalizeString(mod
  * @param {string} module Folder to create in the `modules` directory.
  */
 async function createFolderAndFiles(module) {
-    const modulePath = `${process.cwd()}/src/app/modules/${module}`;
+	const modulePath = `${process.cwd()}/src/app/modules/${module}`;
 
-    try {
-        await fs.access(modulePath);
+	try {
+		await fs.access(modulePath);
 
-        console.error(chalk.redBright(`🛑 Error: Folder "${module}" already exists!`));
+		console.error(
+			chalk.redBright(`🛑 Error: Folder "${module}" already exists!`),
+		);
 
-        return;
-    } catch (_err) {
-        await fs.mkdir(modulePath, { recursive: true });
-    }
+		return;
+	} catch (_err) {
+		await fs.mkdir(modulePath, { recursive: true });
+	}
 
-    const files = fileList(module);
+	const files = fileList(module);
 
-    await Promise.all(
-        files.map(async (file) => {
-            const filePath = `${modulePath}/${file.name}`;
+	await Promise.all(
+		files.map(async (file) => {
+			const filePath = `${modulePath}/${file.name}`;
 
-            try {
-                await fs.writeFile(filePath, file.content);
-            } catch (err) {
-                console.error(chalk.redBright(`🛑 Error creating file ${file}: ${err.message}`));
-            }
-        }),
-    );
+			try {
+				await fs.writeFile(filePath, file.content);
+			} catch (err) {
+				console.error(
+					chalk.redBright(
+						`🛑 Error creating file ${file}: ${err.message}`,
+					),
+				);
+			}
+		}),
+	);
 
-    console.info(chalk.cyan(`✅ Successfully created "${module}" module`));
+	console.info(chalk.cyan(`✅ Successfully created "${module}" module`));
 }
 
 (async () => {
-    const rl = readline.createInterface({
-        input: process.stdin,
-        output: process.stdout,
-    });
+	const rl = readline.createInterface({
+		input: process.stdin,
+		output: process.stdout,
+	});
 
-    const moduleName = await rl.question(chalk.greenBright("Enter module name: "));
-    await createFolderAndFiles(moduleName);
+	const moduleName = await rl.question(
+		chalk.greenBright('Enter module name: '),
+	);
+	await createFolderAndFiles(moduleName);
 
-    rl.close();
+	rl.close();
 })();

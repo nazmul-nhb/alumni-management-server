@@ -12,70 +12,80 @@ import { estimator } from './estimator.mjs';
  * @returns {string} - The icon for the file.
  */
 const getFileIcon = (filePath) => {
-    switch (extname(filePath)) {
-        case '.js':
-            return '🟨';
-        case '.ts':
-            return '🟦';
-        case '.map':
-            return '🟩';
+	switch (extname(filePath)) {
+		case '.js':
+			return '🟨';
+		case '.ts':
+			return '🟦';
+		case '.map':
+			return '🟩';
 
-        default:
-            return '🗃️ ';
-    }
+		default:
+			return '🗃️ ';
+	}
 };
 
 (async () => {
-    const startTime = performance.now();
+	const startTime = performance.now();
 
-    try {
-        // Clean and Build
-        await estimator(execa('rimraf', ['dist']).then(() => execa('tsc', [], { stdio: 'inherit' })),
-            chalk.yellowBright('Building Your Express Application...')
-        );
+	try {
+		// Clean and Build
+		await estimator(
+			execa('rimraf', ['dist']).then(() =>
+				execa('tsc', [], { stdio: 'inherit' }),
+			),
+			chalk.yellowBright('Building Your Express Application...'),
+		);
 
-        // Gather Transformed Files
-        const outputFiles = await globby(['dist/**/*'], { stats: true, objectMode: true });
+		// Gather Transformed Files
+		const outputFiles = await globby(['dist/**/*'], {
+			stats: true,
+			objectMode: true,
+		});
 
-        // Log Transformed Files
-        console.info(chalk.green('\n✓ Transformed Files:'));
+		// Log Transformed Files
+		console.info(chalk.green('\n✓ Transformed Files:'));
 
-        let totalSize = 0;
+		let totalSize = 0;
 
-        const rows = outputFiles.map(({ path, stats }) => {
-            const sizeInKB = (stats?.size || 0) / 1024;
+		const rows = outputFiles.map(({ path, stats }) => {
+			const sizeInKB = (stats?.size || 0) / 1024;
 
-            totalSize += sizeInKB;
+			totalSize += sizeInKB;
 
-            const fileIcon = getFileIcon(path);
-            return [
-                chalk.yellow(`${fileIcon} ${path}`),
-                chalk.cyan(`${sizeInKB.toFixed(2)} kB`),
-            ];
-        });
+			const fileIcon = getFileIcon(path);
+			return [
+				chalk.yellow(`${fileIcon} ${path}`),
+				chalk.cyan(`${sizeInKB.toFixed(2)} kB`),
+			];
+		});
 
-        const columnWidth = 80;
+		const columnWidth = 80;
 
-        rows.forEach(([left, right]) => {
-            console.info(`${left.padEnd(columnWidth)}${right}`);
-        });
+		rows.forEach(([left, right]) => {
+			console.info(`${left.padEnd(columnWidth)}${right}`);
+		});
 
-        // Log Total Size and Build Time
-        const totalSizeInKB = totalSize.toFixed(2);
+		// Log Total Size and Build Time
+		const totalSizeInKB = totalSize.toFixed(2);
 
-        const endTime = performance.now();
+		const endTime = performance.now();
 
-        const buildTime = ((endTime - startTime) / 1000).toFixed(2);
+		const buildTime = ((endTime - startTime) / 1000).toFixed(2);
 
-        const totalFiles = `Total Files: ${chalk.blueBright.bold(outputFiles.length)}`;
+		const totalFiles = `Total Files: ${chalk.blueBright.bold(outputFiles.length)}`;
 
-        const totalFileSize = `Total Size: ${chalk.blueBright.bold(totalSizeInKB)} kB`;
+		const totalFileSize = `Total Size: ${chalk.blueBright.bold(totalSizeInKB)} kB`;
 
-        console.info(chalk.green(`\n✓ ${totalFiles}; ${totalFileSize}`));
+		console.info(chalk.green(`\n✓ ${totalFiles}; ${totalFileSize}`));
 
-        console.info(chalk.green(`\n✓ Application was built in ${chalk.blueBright.bold(buildTime)} seconds!`));
-    } catch (error) {
-        console.error(chalk.red('🛑 Build Failed!'), error);
-        process.exit(1);
-    }
+		console.info(
+			chalk.green(
+				`\n✓ Application was built in ${chalk.blueBright.bold(buildTime)} seconds!`,
+			),
+		);
+	} catch (error) {
+		console.error(chalk.red('🛑 Build Failed!'), error);
+		process.exit(1);
+	}
 })();

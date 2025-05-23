@@ -1,13 +1,7 @@
 {
-	"watch": [
-		"src",
-		".env"
-	],
+	"watch": ["src", ".env"],
 	"ext": "ts",
-	"ignore": [
-		"dist",
-		"node_modules"
-	],
+	"ignore": ["dist", "node_modules"],
 	"exec": "ts-node --transpileOnly src/server.ts",
 	"delay": "2500",
 	"env": {
