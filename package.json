@@ -1,6 +1,6 @@
 {
 	"name": "alumni-management-server",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"description": "Server for Alumni Management System",
 	"main": "dist/server.js",
 	"scripts": {
