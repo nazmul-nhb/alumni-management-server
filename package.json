@@ -69,7 +69,7 @@
 		"jsonwebtoken": "^9.0.2",
 		"mongoose": "^8.15.0",
 		"multer": "^2.0.0",
-		"nhb-toolbox": "^4.12.0",
+		"nhb-toolbox": "^4.12.30",
 		"zod": "^3.25.23"
 	}
 }

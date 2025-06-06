@@ -77,11 +77,11 @@ jobs:
                   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
             # # Create a Git tag if version is different
-            # - name: Create Git Tag
-            #   if: env.VERSION_UNCHANGED == 'false'
-            #   run: |
-            #       git tag v${{ env.VERSION }}
-            #       git push origin v${{ env.VERSION }}
+            - name: Create Git Tag
+              if: env.VERSION_UNCHANGED == 'false'
+              run: |
+                  git tag v${{ env.VERSION }}
+                  git push origin v${{ env.VERSION }}
 
             # # Create GitHub Release if version is different
             # - name: Create Release
