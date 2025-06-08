@@ -1,10 +1,10 @@
 import chalk from 'chalk';
-import { createServer } from 'http';
+import type { Server } from 'http';
 import app from './app';
 import configs from './app/configs';
 import { connectDB } from './app/configs/db';
 
-const server = createServer(app);
+let server: Server;
 
 const bootStrap = async () => {
 	try {
@@ -12,7 +12,7 @@ const bootStrap = async () => {
 		await connectDB();
 
 		// Listen to the Server
-		server.listen(configs.port, () => {
+		server = app.listen(configs.port, () => {
 			console.info(
 				chalk.yellowBright(
 					`👂 Server is Listening on Port: ${configs.port}`,
@@ -55,5 +55,3 @@ process.on('uncaughtException', () => {
 
 	process.exit(1);
 });
-
-export default server;
