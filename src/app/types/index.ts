@@ -1,7 +1,8 @@
 import type { Types } from 'mongoose';
 import type { STATUS_CODES, USER_ROLES } from '../constants';
+import type { Branded } from 'nhb-toolbox/types';
 
-export type TCollection = 'N/A' | 'User' | 'Alumni';
+export type TCollection = 'N/A' | 'User' | 'Alumnus';
 
 export type TMethod =
 	| 'GET'
@@ -17,6 +18,8 @@ export type TResponseDetails = { message: string; statusCode: number };
 export type TStatusCode = (typeof STATUS_CODES)[keyof typeof STATUS_CODES];
 
 export type TUserRole = (typeof USER_ROLES)[keyof typeof USER_ROLES];
+
+export type TEmail = Branded<string, 'email'>;
 
 export type SearchField<T> = {
 	[K in keyof T]: T[K] extends string | number ? K : never;

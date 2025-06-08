@@ -1,6 +1,6 @@
 import type { Router } from 'express';
 import type { JwtPayload } from 'jsonwebtoken';
-import type { TUserRole } from './index';
+import type { TEmail, TUserRole } from './index';
 
 export interface IDuplicateError {
 	errorResponse: {
@@ -46,6 +46,6 @@ export interface IRoute {
 }
 
 export interface DecodedUser extends JwtPayload {
-	email: string;
+	email: TEmail;
 	role: TUserRole;
 }

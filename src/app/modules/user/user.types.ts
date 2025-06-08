@@ -1,9 +1,9 @@
 import type { Document, Model, Types } from 'mongoose';
-import type { TUserRole } from '../../types';
+import type { TEmail, TUserRole } from '../../types';
 
 export interface IUser {
 	name: string;
-	email: string;
+	email: TEmail;
 	password: string;
 	image: string;
 	role: TUserRole;
@@ -11,7 +11,7 @@ export interface IUser {
 }
 
 export interface ILoginCredentials {
-	email: string;
+	email: TEmail;
 	password: string;
 }
 
@@ -26,7 +26,7 @@ export interface IUserDoc extends IUser, Document {
 }
 
 export interface IUserModel extends Model<IUserDoc> {
-	validateUser(email?: string): Promise<IUserDoc>;
+	validateUser(email?: TEmail): Promise<IUserDoc>;
 }
 
 export interface ICurrentUser extends Omit<IUser, 'password'> {

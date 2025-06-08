@@ -3,6 +3,7 @@ import { ErrorWithStatus } from '../../classes/ErrorWithStatus';
 import { STATUS_CODES, USER_ROLES } from '../../constants';
 import { hashPassword } from '../../utilities/authUtilities';
 import type { IUserDoc, IUserModel } from './user.types';
+import type { TEmail } from '../../types';
 
 const userSchema = new Schema<IUserDoc>(
 	{
@@ -53,7 +54,7 @@ userSchema.pre('save', async function (next) {
 });
 
 /** Static method to check if user exists */
-userSchema.statics.validateUser = async function (email?: string) {
+userSchema.statics.validateUser = async function (email?: TEmail) {
 	if (!email) {
 		throw new ErrorWithStatus(
 			'Authentication Error',
