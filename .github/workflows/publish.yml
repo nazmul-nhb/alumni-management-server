@@ -1,4 +1,4 @@
-name: Publish to NPM and Release with Tag
+name: Deploy to Vercel
 
 on:
     push:
@@ -82,16 +82,3 @@ jobs:
               run: |
                   git tag v${{ env.VERSION }}
                   git push origin v${{ env.VERSION }}
-
-            # # Create GitHub Release if version is different
-            # - name: Create Release
-            #   if: env.VERSION_UNCHANGED == 'false'
-            #   uses: softprops/action-gh-release@v1
-            #   with:
-            #       tag_name: 'v${{ env.VERSION }}'
-            #       name: 'Version ${{ env.VERSION }}'
-            #       body: |
-            #           Find in [NPM Registry](https://www.npmjs.com/package/nhb-toolbox/v/${{ env.VERSION }}).
-            #           Full Docs at [Official Docs](https://nhb-toolbox.vercel.app)
-            #   env:
-            #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
