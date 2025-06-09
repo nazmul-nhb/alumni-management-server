@@ -32,7 +32,7 @@ export type NumericKeys<T> = {
 export type ExcludeField<T> =
 	`-${Extract<ExcludeVirtuals<FilterKeys<T>>, string>}`;
 
-/** * Utility type to extract keys from `T` where the value is `string`, `number`, `boolean`, or `Date`. */
+/** * Utility type to extract keys from `T` where the value is `string`, `number`, `boolean`, `Date` or `ObjectId`. */
 type FilterKeys<T> = {
 	[K in keyof T]: T[K] extends (
 		string | number | boolean | Date | Types.ObjectId
