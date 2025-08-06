@@ -12,14 +12,14 @@ import type { TCollection } from '../types';
 export const validateObjectId = (
 	id: Types.ObjectId | string,
 	collection: Lowercase<TCollection>,
-	path: string,
+	path: string
 ) => {
 	if (!isValidObjectId(id)) {
 		throw new ErrorWithStatus(
 			'Validation Error',
 			`Invalid ${collection} ID: ${id}`,
 			STATUS_CODES.BAD_REQUEST,
-			path,
+			path
 		);
 	}
 };

@@ -16,7 +16,7 @@ export const uploadFile = multer({ storage });
 // Upload file to Cloudinary directly from memory
 export const sendImageToCloudinary = (
 	imageName: string,
-	buffer: Buffer,
+	buffer: Buffer
 ): Promise<UploadApiResponse> => {
 	return new Promise((resolve, reject) => {
 		const uploadStream = cloudinary.uploader.upload_stream(
@@ -26,7 +26,7 @@ export const sendImageToCloudinary = (
 					return reject(error);
 				}
 				resolve(result as UploadApiResponse);
-			},
+			}
 		);
 		uploadStream.end(buffer); // Pass the buffer to Cloudinary's stream
 	});

@@ -42,7 +42,7 @@ const loginUser = async (payload: ILoginCredentials): Promise<ITokens> => {
 	// * Check if password matches with the saved password in DB.
 	const passwordMatched = await comparePassword(
 		payload?.password,
-		user?.password,
+		user?.password
 	);
 
 	if (!passwordMatched) {
@@ -50,7 +50,7 @@ const loginUser = async (payload: ILoginCredentials): Promise<ITokens> => {
 			'Authorization Error',
 			`Invalid credentials!`,
 			STATUS_CODES.UNAUTHORIZED,
-			'auth',
+			'auth'
 		);
 	}
 
@@ -63,13 +63,13 @@ const loginUser = async (payload: ILoginCredentials): Promise<ITokens> => {
 	const accessToken = generateToken(
 		jwtPayload,
 		configs.accessSecret,
-		configs.accessExpireTime,
+		configs.accessExpireTime
 	);
 
 	const refreshToken = generateToken(
 		jwtPayload,
 		configs.refreshSecret,
-		configs.refreshExpireTime,
+		configs.refreshExpireTime
 	);
 
 	const { password: _, ...userInfo } = user.toObject();
@@ -98,7 +98,7 @@ const refreshToken = async (token: string): Promise<{ token: string }> => {
 	const accessToken = generateToken(
 		jwtPayload,
 		configs.accessSecret,
-		configs.accessExpireTime,
+		configs.accessExpireTime
 	);
 
 	return { token: accessToken };

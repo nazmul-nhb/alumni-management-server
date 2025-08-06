@@ -8,7 +8,7 @@ const router = Router();
 router.post(
 	'/',
 	validateRequest(alumnusValidations.creationSchema),
-	alumnusControllers.createAlumnus,
+	alumnusControllers.createAlumnus
 );
 
 router.get('/', alumnusControllers.getAllAlumni);

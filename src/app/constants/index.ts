@@ -18,8 +18,11 @@ export const STATUS_CODES = {
 	SERVICE_UNAVAILABLE: 503,
 } as const;
 
-export const USER_ROLES = {
-	SUPER_ADMIN: 'super_admin',
-	ADMIN: 'admin',
-	USER: 'user',
-} as const;
+/** User Roles */
+export const USER_ROLES = ['super_admin', 'admin', 'user'] as const;
+
+/**Admin Roles */
+export const ADMIN_ROLES = USER_ROLES.filter((role) => role !== 'user');
+
+/** Collection Names */
+export const COLLECTIONS = ['N/A', 'User', 'Alumnus'] as const;

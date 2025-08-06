@@ -3,7 +3,7 @@ import type { IErrorResponse, IParserError } from '../types/interfaces';
 
 export const handleErrorWithStatus = (
 	error: ErrorWithStatus,
-	stack?: string,
+	stack?: string
 ) => {
 	return {
 		statusCode: error.status,
@@ -23,7 +23,7 @@ export const handleErrorWithStatus = (
  */
 export const handleGenericError = (
 	error: Error,
-	stack?: string,
+	stack?: string
 ): IErrorResponse => {
 	return {
 		statusCode: 500,
@@ -43,7 +43,7 @@ export const handleGenericError = (
  */
 export const handleParserError = (
 	_error: IParserError,
-	stack?: string,
+	stack?: string
 ): IErrorResponse => {
 	return {
 		statusCode: 400,

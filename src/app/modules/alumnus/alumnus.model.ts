@@ -57,7 +57,7 @@ const alumnusSchema = new Schema<IAlumnusDoc>(
 		timestamps: true,
 		versionKey: false,
 		collection: 'alumni',
-	},
+	}
 );
 
 export const Alumnus = model<IAlumnusDoc>('Alumnus', alumnusSchema);

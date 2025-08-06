@@ -10,7 +10,7 @@ import type {
  * Type guard to check if an error is a MongoDB Duplicate Error.
  */
 export const isMongoDuplicateError = (
-	error: unknown,
+	error: unknown
 ): error is IDuplicateError => {
 	return (
 		typeof error === 'object' &&
@@ -50,7 +50,7 @@ export const isCastError = (error: unknown): error is CastError => {
 				typeof nestedError === 'object' &&
 				nestedError !== null &&
 				'name' in nestedError &&
-				nestedError.name === 'CastError',
+				nestedError.name === 'CastError'
 		);
 	}
 

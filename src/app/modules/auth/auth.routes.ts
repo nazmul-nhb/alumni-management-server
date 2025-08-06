@@ -15,13 +15,13 @@ router.post(
 	uploadFile.single('image'),
 	parseFormData,
 	validateRequest(userValidations.creationSchema),
-	authControllers.registerUser,
+	authControllers.registerUser
 );
 
 router.post(
 	'/login',
 	validateRequest(authValidations.loginSchema),
-	authControllers.loginUser,
+	authControllers.loginUser
 );
 
 router.post('/refresh-token', authControllers.refreshToken);
@@ -29,7 +29,7 @@ router.post('/refresh-token', authControllers.refreshToken);
 router.get(
 	'/profile',
 	authorizeUser(...Object.values(USER_ROLES)),
-	authControllers.getCurrentUser,
+	authControllers.getCurrentUser
 );
 
 export const authRoutes = router;

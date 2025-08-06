@@ -22,7 +22,7 @@ export const connectDB = async (): Promise<void> => {
 		// Listen for connection errors
 		mongoose.connection.on('error', (err) => {
 			console.error(
-				chalk.red(`⛔ MongoDB Connection Error: ${err.message}`),
+				chalk.red(`⛔ MongoDB Connection Error: ${err.message}`)
 			);
 		});
 

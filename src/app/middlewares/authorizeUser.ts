@@ -25,7 +25,7 @@ const authorizeUser = (...requiredRoles: TUserRole[]) => {
 				'Authorization Error',
 				"You're not authorized!",
 				STATUS_CODES.UNAUTHORIZED,
-				'auth',
+				'auth'
 			);
 		}
 

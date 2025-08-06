@@ -20,7 +20,7 @@ const registerUser = catchAsync(async (req, res) => {
 			'Duplicate Error',
 			`User already exists with email: ${userToCreate.email}!`,
 			STATUS_CODES.CONFLICT,
-			'register_user',
+			'register_user'
 		);
 	}
 
@@ -29,7 +29,7 @@ const registerUser = catchAsync(async (req, res) => {
 			'Image Required',
 			`Require image to create new profile!`,
 			STATUS_CODES.BAD_REQUEST,
-			'register_user',
+			'register_user'
 		);
 	}
 
@@ -37,7 +37,7 @@ const registerUser = catchAsync(async (req, res) => {
 
 	const { secure_url } = await sendImageToCloudinary(
 		fileName,
-		req.file.buffer,
+		req.file.buffer
 	);
 
 	const user = await authServices.registerUserInDB({
@@ -64,7 +64,7 @@ const loginUser = catchAsync(async (req, res) => {
 		'User',
 		'OK',
 		{ user, token: accessToken },
-		'Login successful!',
+		'Login successful!'
 	);
 });
 
@@ -79,7 +79,7 @@ const refreshToken = catchAsync(async (req, res) => {
 		'N/A',
 		'OK',
 		token,
-		'Successfully retrieved new access token!',
+		'Successfully retrieved new access token!'
 	);
 });
 

@@ -20,7 +20,7 @@ export const hashPassword = async (password: string): Promise<string> => {
 			'Internal Server Error',
 			'Error hashing password!',
 			STATUS_CODES.INTERNAL_SERVER_ERROR,
-			'password',
+			'password'
 		);
 	}
 };
@@ -33,7 +33,7 @@ export const hashPassword = async (password: string): Promise<string> => {
  */
 export const comparePassword = async (
 	rawPassword: string,
-	hashedPassword: string,
+	hashedPassword: string
 ): Promise<boolean> => {
 	try {
 		return await bcrypt.compare(rawPassword, hashedPassword);
@@ -42,7 +42,7 @@ export const comparePassword = async (
 			'Internal Server Error',
 			'Error comparing password!',
 			STATUS_CODES.INTERNAL_SERVER_ERROR,
-			'password',
+			'password'
 		);
 	}
 };
@@ -57,7 +57,7 @@ export const comparePassword = async (
 export const generateToken = (
 	payload: Pick<IUser, 'email' | 'role'>,
 	secret: string,
-	expiresIn: ms.StringValue,
+	expiresIn: ms.StringValue
 ): string => {
 	try {
 		return jwt.sign(payload, secret, { expiresIn });
@@ -66,7 +66,7 @@ export const generateToken = (
 			'Internal Server Error',
 			'Cannot generate token!',
 			STATUS_CODES.INTERNAL_SERVER_ERROR,
-			'auth',
+			'auth'
 		);
 	}
 };
@@ -83,7 +83,7 @@ export const verifyToken = (secret: string, token?: string): DecodedUser => {
 			'Authorization Error',
 			'Invalid credentials!',
 			STATUS_CODES.UNAUTHORIZED,
-			'auth',
+			'auth'
 		);
 	}
 
@@ -94,7 +94,7 @@ export const verifyToken = (secret: string, token?: string): DecodedUser => {
 			'Authorization Error',
 			'Your token is invalid or expired!',
 			STATUS_CODES.UNAUTHORIZED,
-			'auth',
+			'auth'
 		);
 	}
 };

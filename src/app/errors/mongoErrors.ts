@@ -31,13 +31,13 @@ export function extractCollectionName(error: IDuplicateError): {
 /** * Processes Mongoose Validation Errors and returns a structured response. */
 export const handleValidationError = (
 	error: MongoError.ValidationError,
-	stack?: string,
+	stack?: string
 ): IErrorResponse => {
 	const errorSource: IErrorSource[] = Object.values(error.errors).map(
 		(err: MongoError.ValidatorError | MongoError.CastError) => ({
 			path: err.path,
 			message: err.message,
-		}),
+		})
 	);
 
 	return {
@@ -51,7 +51,7 @@ export const handleValidationError = (
 /** * Processes Mongoose Cast Errors and returns a structured response. */
 export const handleCastError = (
 	error: MongoError.CastError,
-	stack?: string,
+	stack?: string
 ): IErrorResponse => {
 	return {
 		statusCode: 400,
@@ -69,7 +69,7 @@ export const handleCastError = (
 /** * Processes Mongo Duplicate Errors and returns a structured response. */
 export const handleDuplicateError = (
 	error: IDuplicateError,
-	stack?: string,
+	stack?: string
 ) => {
 	const key = Object.keys(error.keyValue)[0];
 	const { collection } = extractCollectionName(error);

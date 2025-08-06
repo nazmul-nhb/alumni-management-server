@@ -1,4 +1,5 @@
 import type { Response } from 'express';
+import { pluralizer } from 'nhb-toolbox';
 import type { TCollection, TMethod, TResponseDetails } from '../types';
 
 /**
@@ -15,7 +16,7 @@ const sendResponse = <T>(
 	collection: TCollection,
 	method: TMethod,
 	data?: T,
-	customMessage?: string,
+	customMessage?: string
 ): void => {
 	const { message, statusCode } = generateResponse(collection, method, data);
 
@@ -40,7 +41,7 @@ const sendResponse = <T>(
 const generateResponse = <T>(
 	collection: TCollection,
 	method: TMethod,
-	data?: T,
+	data?: T
 ): TResponseDetails => {
 	const isArray = Array.isArray(data);
 
@@ -58,7 +59,7 @@ const generateResponse = <T>(
 		case 'GET':
 			message =
 				isArray ?
-					`${collection}s fetched successfully!`
+					`${pluralizer.toPlural(collection)} fetched successfully!`
 				:	`${collection} fetched successfully!`;
 			break;
 		case 'PUT':

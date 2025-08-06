@@ -11,7 +11,7 @@ export const handleRouteNotFound: RequestHandler = (req, _res, next) => {
 		'Not Found Error',
 		`Requested End-Point “${req.method}: ${req.path}” Not Found!`,
 		STATUS_CODES.NOT_FOUND,
-		req.path,
+		req.path
 	);
 
 	return next(error);

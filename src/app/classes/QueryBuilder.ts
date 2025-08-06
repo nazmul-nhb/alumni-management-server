@@ -13,7 +13,7 @@ export class QueryBuilder<T> {
 	 */
 	constructor(
 		public modelQuery: Query<T[], T> = Model.find(),
-		public query?: Record<string, unknown>,
+		public query?: Record<string, unknown>
 	) {
 		this.modelQuery = modelQuery;
 		this.query = query;
@@ -33,7 +33,7 @@ export class QueryBuilder<T> {
 					(field) =>
 						({
 							[field]: { $regex: keyword, $options: 'i' },
-						}) as FilterQuery<T>,
+						}) as FilterQuery<T>
 				),
 			});
 		}
@@ -99,7 +99,7 @@ export class QueryBuilder<T> {
 
 		if (Number.isNaN(min) || Number.isNaN(max)) {
 			throw new Error(
-				`Invalid range values for field '${String(field)}', must be numeric.`,
+				`Invalid range values for field '${String(field)}', must be numeric.`
 			);
 		}
 
@@ -184,12 +184,12 @@ export class QueryBuilder<T> {
 			fields.push(this?.query?.exclude);
 		} else if (Array.isArray(this?.query?.exclude)) {
 			(this?.query?.exclude as string[]).forEach((field) =>
-				fields.push(field),
+				fields.push(field)
 			);
 		}
 
 		this.modelQuery = this.modelQuery.select(
-			[...new Set(fields)].join(' '),
+			[...new Set(fields)].join(' ')
 		);
 
 		return this;

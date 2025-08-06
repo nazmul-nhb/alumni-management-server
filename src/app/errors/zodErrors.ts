@@ -5,7 +5,7 @@ import type { IErrorResponse, IErrorSource } from '../types/interfaces';
 /** * Processes Zod Validation Errors and returns a structured response. */
 export const handleZodErrors = (
 	error: ZodError,
-	stack?: string,
+	stack?: string
 ): IErrorResponse => {
 	const errorSource: IErrorSource[] = error.errors.map((zodIssue) => {
 		const path = zodIssue.path.join('.');
@@ -17,7 +17,7 @@ export const handleZodErrors = (
 				break;
 			case ZodIssueCode.invalid_enum_value:
 				message = `Invalid value for “${path}”. Expected one of: “${zodIssue.options.join(
-					', ',
+					', '
 				)}” but received “${zodIssue.received}”!`;
 				break;
 			// case ZodIssueCode.too_small:

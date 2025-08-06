@@ -1,8 +1,8 @@
 import type { Types } from 'mongoose';
-import type { STATUS_CODES, USER_ROLES } from '../constants';
+import type { COLLECTIONS, STATUS_CODES, USER_ROLES } from '../constants';
 import type { Branded } from 'nhb-toolbox/types';
 
-export type TCollection = 'N/A' | 'User' | 'Alumnus';
+export type TCollection = (typeof COLLECTIONS)[number];
 
 export type TMethod =
 	| 'GET'
@@ -17,7 +17,7 @@ export type TResponseDetails = { message: string; statusCode: number };
 
 export type TStatusCode = (typeof STATUS_CODES)[keyof typeof STATUS_CODES];
 
-export type TUserRole = (typeof USER_ROLES)[keyof typeof USER_ROLES];
+export type TUserRole = (typeof USER_ROLES)[number];
 
 export type TEmail = Branded<string, 'email'>;
 

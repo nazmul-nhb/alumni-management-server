@@ -11,7 +11,7 @@ const createAlumnus = catchAsync(async (req, res) => {
 const getAllAlumni = catchAsync(async (_req, res) => {
 	const alumni = await alumnusServices.getAllAlumniFromDB();
 
-	sendResponse(res, 'Alumnus', 'GET', alumni, 'Fetched all alumni');
+	sendResponse(res, 'Alumnus', 'GET', alumni);
 });
 
 export const alumnusControllers = { getAllAlumni, createAlumnus };

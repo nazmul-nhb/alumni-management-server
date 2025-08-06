@@ -15,8 +15,8 @@ const bootStrap = async () => {
 		server = app.listen(configs.port, () => {
 			console.info(
 				chalk.yellowBright(
-					`👂 Server is Listening on Port: ${configs.port}`,
-				),
+					`👂 Server is Listening on Port: ${configs.port}`
+				)
 			);
 		});
 	} catch (error) {
@@ -33,8 +33,8 @@ bootStrap().catch(console.dir);
 process.on('unhandledRejection', () => {
 	console.error(
 		chalk.redBright(
-			`🚫 Unhandled Rejection Detected!\n🛑 Server is Shutting Down...`,
-		),
+			`🚫 Unhandled Rejection Detected!\n🛑 Server is Shutting Down...`
+		)
 	);
 
 	if (server) {
@@ -49,8 +49,8 @@ process.on('unhandledRejection', () => {
 process.on('uncaughtException', () => {
 	console.error(
 		chalk.redBright(
-			`🚫 Uncaught Exception Detected!\n🛑 Server is Shutting Down...`,
-		),
+			`🚫 Uncaught Exception Detected!\n🛑 Server is Shutting Down...`
+		)
 	);
 
 	process.exit(1);

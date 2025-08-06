@@ -12,7 +12,7 @@ export class ErrorWithStatus extends Error {
 		public name: string,
 		public message: string,
 		public status: TStatusCode,
-		public path: string = '',
+		public path: string = ''
 	) {
 		super(message);
 		this.name = name;
