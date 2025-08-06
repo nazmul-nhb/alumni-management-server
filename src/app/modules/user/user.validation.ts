@@ -11,6 +11,7 @@ const creationSchema = z
 				message: 'Name must start with a capital letter',
 			}),
 		email: z.string().email(),
+		image: z.any({ required_error: 'Image is required!' }),
 		password: z
 			.string()
 			.trim()

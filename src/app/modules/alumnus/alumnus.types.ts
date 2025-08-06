@@ -1,18 +1,18 @@
 import type { Document, Types } from 'mongoose';
+import type { Numeric } from 'nhb-toolbox/types';
+import type { TEmail } from '../../types';
 import type {
 	BLOOD_GROUPS,
 	DEGREES,
 	GENDERS,
 	PARTICIPATION,
 } from './alumnus.constants';
-import type { TEmail } from '../../types';
-import type { Numeric } from 'nhb-toolbox/types';
 
 export interface IAlumnus {
-	personalInfo: IPersonalInfo;
-	contactInfo: IContactInfo;
-	academicInfo: IAcademicInfo;
-	employmentInfo?: IEmploymentInfo;
+	personal_info: IPersonalInfo;
+	contact_info: IContactInfo;
+	academic_info: IAcademicInfo;
+	employment_info?: IEmploymentInfo;
 	participation: TParticipation;
 	interest: string;
 }
@@ -23,33 +23,35 @@ export type TDegree = (typeof DEGREES)[number];
 export type TParticipation = (typeof PARTICIPATION)[number];
 
 export interface IPersonalInfo {
-	fullName: string;
-	dateOfBirth: string;
+	full_name: string;
+	date_of_birth: string;
 	gender: TGender;
 	nationality: string;
-	bloodGroup: TBloodGroup;
+	blood_group: TBloodGroup;
 }
 
 export interface IContactInfo {
 	email: TEmail;
 	phone: `${number}`;
-	currentAddress?: string;
+	current_address?: string;
 }
 
 export interface IAcademicInfo {
-	studentID?: Numeric;
-	degreeEarned: TDegree;
-	graduationYear: number;
-	focusArea?: string;
+	student_id?: Numeric;
+	degree_earned: TDegree;
+	graduation_year: number;
+	focus_area?: string;
 }
 
 export interface IEmploymentInfo {
-	currentEmployer: string;
-	jobTitle: string;
+	current_employer: string;
+	job_title: string;
 	sector: string;
-	workLocation: string;
+	work_location: string;
 }
 
 export interface IAlumnusDoc extends IAlumnus, Document {
 	_id: Types.ObjectId;
+	created_at: string;
+	updated_at: string;
 }

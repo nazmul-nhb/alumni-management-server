@@ -35,13 +35,16 @@ const userSchema = new Schema<IUserDoc>(
 			enum: USER_ROLES,
 			default: 'user',
 		},
-		isActive: {
+		is_active: {
 			type: Boolean,
 			default: false,
 		},
 	},
 	{
-		timestamps: true,
+		timestamps: {
+			createdAt: 'created_at',
+			updatedAt: 'updated_at',
+		},
 		versionKey: false,
 	}
 );
@@ -75,7 +78,7 @@ userSchema.statics.validateUser = async function (email?: TEmail) {
 		);
 	}
 
-	if (!user.isActive) {
+	if (!user.is_active) {
 		throw new ErrorWithStatus(
 			'Authentication Error',
 			`User with email ${email} is not active!`,

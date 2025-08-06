@@ -1,50 +1,50 @@
 import { Schema, model } from 'mongoose';
-import type { IAlumnusDoc } from './alumnus.types';
 import {
 	BLOOD_GROUPS,
 	DEGREES,
 	GENDERS,
 	PARTICIPATION,
 } from './alumnus.constants';
+import type { IAlumnusDoc } from './alumnus.types';
 
 const alumnusSchema = new Schema<IAlumnusDoc>(
 	{
-		personalInfo: {
-			fullName: { type: String, required: true },
-			dateOfBirth: { type: String, required: true },
+		personal_info: {
+			full_name: { type: String, required: true },
+			date_of_birth: { type: String, required: true },
 			gender: {
 				type: String,
 				enum: GENDERS,
 				required: true,
 			},
 			nationality: { type: String, required: true },
-			bloodGroup: {
+			blood_group: {
 				type: String,
 				enum: BLOOD_GROUPS,
 				required: true,
 			},
 		},
-		contactInfo: {
+		contact_info: {
 			email: { type: String, required: true, unique: true },
 			phone: { type: String, required: true },
-			currentAddress: { type: String },
+			current_address: { type: String },
 		},
-		academicInfo: {
-			studentID: { type: Number || String },
-			degreeEarned: {
+		academic_info: {
+			student_id: { type: Number || String },
+			degree_earned: {
 				type: String,
 				enum: DEGREES,
 				required: true,
 				default: 'BA',
 			},
-			graduationYear: { type: Number, required: true },
-			focusArea: { type: String },
+			graduation_year: { type: Number, required: true },
+			focus_area: { type: String },
 		},
-		employmentInfo: {
-			currentEmployer: { type: String },
-			jobTitle: { type: String },
+		employment_info: {
+			current_employer: { type: String },
+			job_title: { type: String },
 			sector: { type: String },
-			workLocation: { type: String },
+			work_location: { type: String },
 		},
 		participation: {
 			type: String,
@@ -54,10 +54,13 @@ const alumnusSchema = new Schema<IAlumnusDoc>(
 		interest: { type: String, required: true },
 	},
 	{
-		timestamps: true,
+		timestamps: {
+			createdAt: 'created_at',
+			updatedAt: 'updated_at',
+		},
 		versionKey: false,
 		collection: 'alumni',
 	}
 );
 
-export const Alumnus = model<IAlumnusDoc>('Alumnus', alumnusSchema);
+export const Alumnus = model<IAlumnusDoc>('Alumni', alumnusSchema);

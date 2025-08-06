@@ -12,9 +12,9 @@ export const handleZodErrors = (
 		let message = zodIssue.message;
 
 		switch (zodIssue.code) {
-			case ZodIssueCode.invalid_type:
-				message = `Expected ${zodIssue.expected} for “${path}” but received “${zodIssue.received}”!`;
-				break;
+			// case ZodIssueCode.invalid_type:
+			// 	message = `Expected ${zodIssue.expected} for “${path}” but received “${zodIssue.received}”!`;
+			// 	break;
 			case ZodIssueCode.invalid_enum_value:
 				message = `Invalid value for “${path}”. Expected one of: “${zodIssue.options.join(
 					', '

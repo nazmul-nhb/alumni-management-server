@@ -1,19 +1,19 @@
-import configs from '../../configs';
-import { User } from '../user/user.model';
-import { STATUS_CODES } from '../../constants';
 import { ErrorWithStatus } from '../../classes/ErrorWithStatus';
+import configs from '../../configs';
+import { STATUS_CODES } from '../../constants';
+import type { DecodedUser } from '../../types/interfaces';
 import {
 	comparePassword,
 	generateToken,
 	verifyToken,
 } from '../../utilities/authUtilities';
+import { User } from '../user/user.model';
 import type {
 	ICurrentUser,
 	ILoginCredentials,
 	ITokens,
 	IUser,
 } from '../user/user.types';
-import type { DecodedUser } from '../../types/interfaces';
 
 /**
  * Create a new user in MongoDB `user` collection.
@@ -74,7 +74,11 @@ const loginUser = async (payload: ILoginCredentials): Promise<ITokens> => {
 
 	const { password: _, ...userInfo } = user.toObject();
 
-	return { accessToken, refreshToken, user: userInfo as ICurrentUser };
+	return {
+		access_token: accessToken,
+		refresh_token: refreshToken,
+		user: userInfo as ICurrentUser,
+	};
 };
 
 /**

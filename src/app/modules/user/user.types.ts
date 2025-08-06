@@ -7,7 +7,7 @@ export interface IUser {
 	password: string;
 	image: string;
 	role: TUserRole;
-	isActive?: boolean;
+	is_active?: boolean;
 }
 
 export interface ILoginCredentials {
@@ -16,8 +16,8 @@ export interface ILoginCredentials {
 }
 
 export interface ITokens {
-	accessToken: string;
-	refreshToken: string;
+	access_token: string;
+	refresh_token: string;
 	user: ICurrentUser;
 }
 
@@ -31,6 +31,6 @@ export interface IUserModel extends Model<IUserDoc> {
 
 export interface ICurrentUser extends Omit<IUser, 'password'> {
 	_id: Types.ObjectId;
-	createdAt: string;
-	updatedAt: string;
+	created_at: string;
+	updated_at: string;
 }
