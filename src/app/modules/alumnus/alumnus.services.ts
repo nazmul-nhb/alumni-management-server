@@ -1,4 +1,6 @@
+import { ErrorWithStatus } from '../../classes/ErrorWithStatus';
 import { QueryBuilder } from '../../classes/QueryBuilder';
+import { STATUS_CODES } from '../../constants/index';
 import { Alumnus } from './alumnus.model';
 import type { IAlumnus } from './alumnus.types';
 
@@ -17,4 +19,51 @@ const getAllAlumniFromDB = async (query?: Record<string, unknown>) => {
 	return alumni;
 };
 
-export const alumnusServices = { getAllAlumniFromDB, createAlumnusInDB };
+const getSingleAlumnusFromDB = async (id: string) => {
+	const alumnus = await Alumnus.findAlumnusById(id);
+
+	return alumnus;
+};
+
+const updateAlumnusInDB = async (id: string, payload: Partial<IAlumnus>) => {
+	const updatedAlumnus = await Alumnus.findOneAndUpdate(
+		{ _id: id },
+		payload,
+		{
+			runValidators: true,
+			new: true,
+		}
+	);
+
+	if (!updatedAlumnus) {
+		throw new ErrorWithStatus(
+			'Not Updated Error',
+			`Cannot update specified alumnus with ID ${id}!`,
+			STATUS_CODES.INTERNAL_SERVER_ERROR,
+			'update_alumnus'
+		);
+	}
+
+	return updatedAlumnus;
+};
+
+const deleteAlumnusFromDB = async (id: string) => {
+	const result = await Alumnus.deleteOne({ _id: id });
+
+	if (result.deletedCount < 1) {
+		throw new ErrorWithStatus(
+			'Delete Failed Error',
+			`Failed to delete alumnus with ID ${id}!`,
+			STATUS_CODES.INTERNAL_SERVER_ERROR,
+			'delete_alumnus'
+		);
+	}
+};
+
+export const alumnusServices = {
+	createAlumnusInDB,
+	getAllAlumniFromDB,
+	getSingleAlumnusFromDB,
+	updateAlumnusInDB,
+	deleteAlumnusFromDB,
+};

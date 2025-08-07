@@ -5,7 +5,9 @@ import {
 	GENDERS,
 	PARTICIPATION,
 } from './alumnus.constants';
-import type { IAlumnusDoc } from './alumnus.types';
+import type { IAlumnusDoc, IAlumnusModel } from './alumnus.types';
+import { ErrorWithStatus } from '../../classes/ErrorWithStatus';
+import { STATUS_CODES } from '../../constants';
 
 const alumnusSchema = new Schema<IAlumnusDoc>(
 	{
@@ -63,4 +65,31 @@ const alumnusSchema = new Schema<IAlumnusDoc>(
 	}
 );
 
-export const Alumnus = model<IAlumnusDoc>('Alumni', alumnusSchema);
+alumnusSchema.statics.findAlumnusById = async function (id: string) {
+	if (!id) {
+		throw new ErrorWithStatus(
+			'Bad Request',
+			'Please provide a valid ID!',
+			STATUS_CODES.BAD_REQUEST,
+			'alumnus'
+		);
+	}
+
+	const alumnus = await this.findById(id);
+
+	if (!alumnus) {
+		throw new ErrorWithStatus(
+			'Not Found Error',
+			`No alumnus found with ID ${id}!`,
+			STATUS_CODES.NOT_FOUND,
+			'alumnus'
+		);
+	}
+
+	return alumnus;
+};
+
+export const Alumnus = model<IAlumnusDoc, IAlumnusModel>(
+	'Alumni',
+	alumnusSchema
+);

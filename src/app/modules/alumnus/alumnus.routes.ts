@@ -13,4 +13,14 @@ router.post(
 
 router.get('/', alumnusControllers.getAllAlumni);
 
+router.get('/:id', alumnusControllers.getSingleAlumnus);
+
+router.patch(
+	'/:id',
+	validateRequest(alumnusValidations.updateSchema),
+	alumnusControllers.updateAlumnus
+);
+
+router.delete('/:id', alumnusControllers.deleteAlumnus);
+
 export const alumnusRoutes = router;

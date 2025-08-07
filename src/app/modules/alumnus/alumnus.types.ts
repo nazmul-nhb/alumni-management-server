@@ -1,4 +1,4 @@
-import type { Document, Types } from 'mongoose';
+import type { Document, Model, Types } from 'mongoose';
 import type { Numeric } from 'nhb-toolbox/types';
 import type { TEmail } from '../../types';
 import type {
@@ -54,4 +54,8 @@ export interface IAlumnusDoc extends IAlumnus, Document {
 	_id: Types.ObjectId;
 	created_at: string;
 	updated_at: string;
+}
+
+export interface IAlumnusModel extends Model<IAlumnusDoc> {
+	findAlumnusById: (id: string) => Promise<IAlumnusDoc>;
 }

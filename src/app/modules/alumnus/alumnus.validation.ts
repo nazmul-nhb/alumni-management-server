@@ -86,4 +86,6 @@ export const creationSchema = z
 	})
 	.strict();
 
-export const alumnusValidations = { creationSchema };
+const updateSchema = creationSchema.partial();
+
+export const alumnusValidations = { creationSchema, updateSchema };
