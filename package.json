@@ -48,7 +48,7 @@
     "globals": "^16.1.0",
     "husky": "^9.1.7",
     "lint-staged": "^16.1.4",
-    "nhb-scripts": "^1.8.41",
+    "nhb-scripts": "^1.8.46",
     "nodemon": "^3.1.10",
     "prettier": "^3.5.3",
     "ts-node": "^10.9.2",

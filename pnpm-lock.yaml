@@ -94,8 +94,8 @@ importers:
         specifier: ^16.1.4
         version: 16.1.4
       nhb-scripts:
-        specifier: ^1.8.41
-        version: 1.8.41
+        specifier: ^1.8.46
+        version: 1.8.46
       nodemon:
         specifier: ^3.1.10
         version: 3.1.10
@@ -1650,8 +1650,8 @@ packages:
     resolution: {integrity: sha512-8Ofs/AUQh8MaEcrlq5xOX0CQ9ypTF5dl78mjlMNfOK08fzpgTHQRQPBxcPlEtIw0yRpws+Zo/3r+5WRby7u3Gg==}
     engines: {node: '>= 0.6'}
 
-  nhb-scripts@1.8.41:
-    resolution: {integrity: sha512-nfHIJDeRJoazaxBQT+qxmtVUmcyVU8J6lJw0kJTb1uFRgd+9n4xuHwJSRw5kIbNFHeLxoprGYloIlnmHooZmBg==}
+  nhb-scripts@1.8.46:
+    resolution: {integrity: sha512-oNAGtNQmD6gkCRVyeFM+BqDguhAxcD/YboSLqBp5nm7oMYazrpXVl+YzKLtiOz3gbKxc4ZvpVd/wkBOAH2CkVQ==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -3976,7 +3976,7 @@ snapshots:
 
   negotiator@1.0.0: {}
 
-  nhb-scripts@1.8.41:
+  nhb-scripts@1.8.46:
     dependencies:
       '@clack/prompts': 0.11.0
       chalk: 5.4.1
