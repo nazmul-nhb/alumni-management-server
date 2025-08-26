@@ -12,9 +12,7 @@ export const corsOptions: CorsOptions = {
 		if (
 			!origin ||
 			allowedOrigins.some((pattern) =>
-				typeof pattern === 'string' ?
-					pattern === origin
-				:	pattern.test(origin)
+				typeof pattern === 'string' ? pattern === origin : pattern.test(origin)
 			)
 		) {
 			callback(null, true);
