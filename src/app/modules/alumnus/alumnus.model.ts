@@ -1,13 +1,13 @@
-import { Schema, model } from 'mongoose';
+import { ErrorWithStatus } from '@/classes/ErrorWithStatus';
 import {
 	BLOOD_GROUPS,
 	DEGREES,
 	GENDERS,
 	PARTICIPATION,
-} from './alumnus.constants';
-import type { IAlumnusDoc, IAlumnusModel } from './alumnus.types';
-import { ErrorWithStatus } from '../../classes/ErrorWithStatus';
-import { STATUS_CODES } from '../../constants';
+} from '@/modules/alumnus/alumnus.constants';
+import type { IAlumnusDoc, IAlumnusModel } from '@/modules/alumnus/alumnus.types';
+import { Schema, model } from 'mongoose';
+import { STATUS_CODES } from 'nhb-toolbox/constants';
 
 const alumnusSchema = new Schema<IAlumnusDoc>(
 	{
@@ -19,6 +19,7 @@ const alumnusSchema = new Schema<IAlumnusDoc>(
 				enum: GENDERS,
 				required: true,
 			},
+			image: { type: String, required: true },
 			nationality: { type: String, required: true },
 			blood_group: {
 				type: String,
@@ -89,7 +90,4 @@ alumnusSchema.statics.findAlumnusById = async function (id: string) {
 	return alumnus;
 };
 
-export const Alumnus = model<IAlumnusDoc, IAlumnusModel>(
-	'Alumni',
-	alumnusSchema
-);
+export const Alumnus = model<IAlumnusDoc, IAlumnusModel>('Alumni', alumnusSchema);

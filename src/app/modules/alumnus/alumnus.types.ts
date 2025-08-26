@@ -1,12 +1,12 @@
-import type { Document, Model, Types } from 'mongoose';
-import type { Numeric } from 'nhb-toolbox/types';
-import type { TEmail } from '../../types';
 import type {
 	BLOOD_GROUPS,
 	DEGREES,
 	GENDERS,
 	PARTICIPATION,
-} from './alumnus.constants';
+} from '@/modules/alumnus/alumnus.constants';
+import type { TEmail } from '@/types';
+import type { Document, Model, Types } from 'mongoose';
+import type { Numeric } from 'nhb-toolbox/types';
 
 export interface IAlumnus {
 	personal_info: IPersonalInfo;
@@ -26,6 +26,7 @@ export interface IPersonalInfo {
 	full_name: string;
 	date_of_birth: string;
 	gender: TGender;
+	image: string;
 	nationality: string;
 	blood_group: TBloodGroup;
 }

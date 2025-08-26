@@ -1,11 +1,11 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import configs from '../configs';
-import { ErrorWithStatus } from '../classes/ErrorWithStatus';
-import { STATUS_CODES } from '../constants';
-import type { DecodedUser } from '../types/interfaces';
-import type { IUser } from '../modules/user/user.types';
-import type { ms } from '../..';
+import configs from '@/configs';
+import { ErrorWithStatus } from '@/classes/ErrorWithStatus';
+import type { DecodedUser } from '@/types/interfaces';
+import type { IUser } from '@/modules/user/user.types';
+import { STATUS_CODES } from 'nhb-toolbox/constants';
+import type { StringValue } from 'ms';
 
 /**
  * * Utility function to hash password using `bcrypt`.
@@ -57,7 +57,7 @@ export const comparePassword = async (
 export const generateToken = (
 	payload: Pick<IUser, 'email' | 'role'>,
 	secret: string,
-	expiresIn: ms.StringValue
+	expiresIn: StringValue
 ): string => {
 	try {
 		return jwt.sign(payload, secret, { expiresIn });

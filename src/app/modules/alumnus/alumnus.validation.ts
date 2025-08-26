@@ -1,21 +1,20 @@
-import { z } from 'zod';
 import {
 	BLOOD_GROUPS,
 	DEGREES,
 	GENDERS,
 	PARTICIPATION,
-} from './alumnus.constants';
+} from '@/modules/alumnus/alumnus.constants';
+import { z } from 'zod';
 
 const personalInfoSchema = z.object({
-	full_name: z
-		.string({ error: 'Full name is required' })
-		.min(1, 'Full name is required'),
+	full_name: z.string({ error: 'Full name is required' }).min(1, 'Full name is required'),
 	date_of_birth: z
 		.string({ error: 'Date of birth is required' })
 		.min(1, 'Date of birth is required'),
 	gender: z.enum(GENDERS, {
 		message: 'Invalid gender',
 	}),
+	image: z.url({ error: 'Valid image URL is required' }),
 	nationality: z
 		.string({ error: 'Nationality is required' })
 		.min(1, 'Nationality is required'),
@@ -34,10 +33,7 @@ const contactInfoSchema = z.object({
 
 const academicInfoSchema = z.object({
 	student_id: z
-		.union([
-			z.number(),
-			z.string().regex(/^\d+$/, 'Student ID must be numeric'),
-		])
+		.union([z.number(), z.string().regex(/^\d+$/, 'Student ID must be numeric')])
 		.transform(Number)
 		.optional(),
 	degree_earned: z
@@ -59,9 +55,7 @@ const employmentInfoSchema = z
 		job_title: z
 			.string({ error: 'Job title is required' })
 			.min(1, 'Job title is required'),
-		sector: z
-			.string({ error: 'Sector is required' })
-			.min(1, 'Sector is required'),
+		sector: z.string({ error: 'Sector is required' }).min(1, 'Sector is required'),
 		work_location: z
 			.string({ error: 'Work location is required' })
 			.min(1, 'Work location is required'),

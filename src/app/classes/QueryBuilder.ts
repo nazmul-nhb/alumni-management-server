@@ -1,5 +1,5 @@
+import type { ExcludeField, NumericKeys, SearchField } from '@/types';
 import { type FilterQuery, Model, type Query } from 'mongoose';
-import type { ExcludeField, NumericKeys, SearchField } from '../types';
 
 /**
  * @class QueryBuilder
@@ -105,10 +105,8 @@ export class QueryBuilder<T> {
 
 		if (min != null || max != null) {
 			const rangeFilter: FilterQuery<T> = {};
-			if (min != null)
-				rangeFilter[field] = { ...rangeFilter[field], $gte: min };
-			if (max != null)
-				rangeFilter[field] = { ...rangeFilter[field], $lte: max };
+			if (min != null) rangeFilter[field] = { ...rangeFilter[field], $gte: min };
+			if (max != null) rangeFilter[field] = { ...rangeFilter[field], $lte: max };
 
 			this.modelQuery = this.modelQuery.find(rangeFilter);
 		}
@@ -183,14 +181,10 @@ export class QueryBuilder<T> {
 		if (typeof this?.query?.exclude === 'string') {
 			fields.push(this?.query?.exclude);
 		} else if (Array.isArray(this?.query?.exclude)) {
-			(this?.query?.exclude as string[]).forEach((field) =>
-				fields.push(field)
-			);
+			(this?.query?.exclude as string[]).forEach((field) => fields.push(field));
 		}
 
-		this.modelQuery = this.modelQuery.select(
-			[...new Set(fields)].join(' ')
-		);
+		this.modelQuery = this.modelQuery.select([...new Set(fields)].join(' '));
 
 		return this;
 	}

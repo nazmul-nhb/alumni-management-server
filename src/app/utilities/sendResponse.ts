@@ -1,6 +1,6 @@
+import type { TCollection, TMethod, TResponseDetails } from '@/types';
 import type { Response } from 'express';
 import { pluralizer } from 'nhb-toolbox';
-import type { TCollection, TMethod, TResponseDetails } from '../types';
 
 /**
  * * Sends a formatted JSON response.

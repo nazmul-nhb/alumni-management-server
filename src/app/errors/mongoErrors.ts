@@ -1,9 +1,5 @@
+import type { IDuplicateError, IErrorResponse, IErrorSource } from '@/types/interfaces';
 import type { Error as MongoError } from 'mongoose';
-import type {
-	IDuplicateError,
-	IErrorResponse,
-	IErrorSource,
-} from '../types/interfaces';
 import { capitalizeString } from 'nhb-toolbox';
 
 /**
@@ -67,16 +63,11 @@ export const handleCastError = (
 };
 
 /** * Processes Mongo Duplicate Errors and returns a structured response. */
-export const handleDuplicateError = (
-	error: IDuplicateError,
-	stack?: string
-) => {
+export const handleDuplicateError = (error: IDuplicateError, stack?: string) => {
 	const key = Object.keys(error.keyValue)[0];
 	const { collection } = extractCollectionName(error);
 	const docName =
-		collection ?
-			capitalizeString(collection).replace(/s(?=[^s]*$)/, '')
-		:	'Document';
+		collection ? capitalizeString(collection).replace(/s(?=[^s]*$)/, '') : 'Document';
 
 	return {
 		statusCode: 409,

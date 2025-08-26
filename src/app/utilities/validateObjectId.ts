@@ -1,7 +1,7 @@
+import { ErrorWithStatus } from '@/classes/ErrorWithStatus';
+import type { TCollection } from '@/types';
 import { isValidObjectId, type Types } from 'mongoose';
-import { ErrorWithStatus } from '../classes/ErrorWithStatus';
-import { STATUS_CODES } from '../constants';
-import type { TCollection } from '../types';
+import { STATUS_CODES } from 'nhb-toolbox/constants';
 
 /**
  * * Utility to check MongoDB `ObjectId`

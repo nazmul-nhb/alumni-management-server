@@ -1,6 +1,6 @@
-import catchAsync from '../../utilities/catchAsync';
-import sendResponse from '../../utilities/sendResponse';
-import { alumnusServices } from './alumnus.services';
+import catchAsync from '@/utilities/catchAsync';
+import sendResponse from '@/utilities/sendResponse';
+import { alumnusServices } from '@/modules/alumnus/alumnus.services';
 
 const createAlumnus = catchAsync(async (req, res) => {
 	const newAlumnus = await alumnusServices.createAlumnusInDB(req.body);
@@ -15,18 +15,13 @@ const getAllAlumni = catchAsync(async (_req, res) => {
 });
 
 const getSingleAlumnus = catchAsync(async (req, res) => {
-	const alumnus = await alumnusServices.getSingleAlumnusFromDB(
-		req?.params?.id
-	);
+	const alumnus = await alumnusServices.getSingleAlumnusFromDB(req?.params?.id);
 
 	sendResponse(res, 'Alumnus', 'GET', alumnus);
 });
 
 const updateAlumnus = catchAsync(async (req, res) => {
-	const alumnus = await alumnusServices.updateAlumnusInDB(
-		req?.params?.id,
-		req?.body
-	);
+	const alumnus = await alumnusServices.updateAlumnusInDB(req?.params?.id, req?.body);
 
 	sendResponse(res, 'Alumnus', 'PATCH', alumnus);
 });

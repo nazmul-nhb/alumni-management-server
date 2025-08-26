@@ -1,14 +1,11 @@
+import { corsOptions } from '@/configs/cors';
+import { catchAllErrors, handleRouteNotFound } from '@/middlewares/errorHandlers';
+import router from '@/routes';
+import sendResponse from '@/utilities/sendResponse';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import type { Application, Request, Response } from 'express';
 import express from 'express';
-import { corsOptions } from './app/configs/cors';
-import {
-	catchAllErrors,
-	handleRouteNotFound,
-} from './app/middlewares/errorHandlers';
-import router from './app/routes';
-import sendResponse from './app/utilities/sendResponse';
 
 // * Create an Express App
 const app: Application = express();

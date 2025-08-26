@@ -1,8 +1,8 @@
+import { alumnusRoutes } from '@/modules/alumnus/alumnus.routes';
+import { authRoutes } from '@/modules/auth/auth.routes';
+import { userRoutes } from '@/modules/user/user.routes';
+import type { IRoute } from '@/types/interfaces';
 import { Router } from 'express';
-import { alumnusRoutes } from '../modules/alumnus/alumnus.routes';
-import { authRoutes } from '../modules/auth/auth.routes';
-import { userRoutes } from '../modules/user/user.routes';
-import type { IRoute } from '../types/interfaces';
 
 const router = Router();
 

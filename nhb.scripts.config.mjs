@@ -22,6 +22,10 @@ export default defineScriptConfig({
 		defaultPath: '.',
 		excludePaths: ['node_modules', 'dist'],
 	},
+	build: {
+		distFolder: 'dist',
+		commands: [{ cmd: 'tsc' }, { cmd: 'tsc-alias' }],
+	},
 	module: {
 		force: false,
 		destination: 'src/app/modules',
@@ -30,13 +34,13 @@ export default defineScriptConfig({
 			'express-mongoose-zod': {
 				createFolder: true,
 				destination: 'src/app/modules',
-				files: expressMongooseZodTemplate,
+				files: (moduleName) => expressMongooseZodTemplate(moduleName, true),
 			},
 		},
 		hooks: {
 			onComplete: (moduleName) => {
 				updateCollection(moduleName);
-				updateRoutes(moduleName);
+				updateRoutes(moduleName, true);
 			},
 		},
 	},

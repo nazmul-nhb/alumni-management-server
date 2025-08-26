@@ -1,19 +1,15 @@
-import { ErrorWithStatus } from '../../classes/ErrorWithStatus';
-import configs from '../../configs';
-import { STATUS_CODES } from '../../constants';
-import type { DecodedUser } from '../../types/interfaces';
-import {
-	comparePassword,
-	generateToken,
-	verifyToken,
-} from '../../utilities/authUtilities';
-import { User } from '../user/user.model';
+import { ErrorWithStatus } from '@/classes/ErrorWithStatus';
+import configs from '@/configs';
+import { User } from '@/modules/user/user.model';
 import type {
 	ICurrentUser,
 	ILoginCredentials,
 	ITokens,
 	IUser,
-} from '../user/user.types';
+} from '@/modules/user/user.types';
+import type { DecodedUser } from '@/types/interfaces';
+import { comparePassword, generateToken, verifyToken } from '@/utilities/authUtilities';
+import { STATUS_CODES } from 'nhb-toolbox/constants';
 
 /**
  * Create a new user in MongoDB `user` collection.
@@ -38,10 +34,7 @@ const loginUser = async (payload: ILoginCredentials): Promise<ITokens> => {
 	const user = await User.validateUser(payload.email);
 
 	// * Check if password matches with the saved password in DB.
-	const passwordMatched = await comparePassword(
-		payload?.password,
-		user?.password
-	);
+	const passwordMatched = await comparePassword(payload?.password, user?.password);
 
 	if (!passwordMatched) {
 		throw new ErrorWithStatus(

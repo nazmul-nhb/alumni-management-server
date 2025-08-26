@@ -1,7 +1,7 @@
+import validateRequest from '@/middlewares/validateRequest';
+import { alumnusControllers } from '@/modules/alumnus/alumnus.controllers';
+import { alumnusValidations } from '@/modules/alumnus/alumnus.validation';
 import { Router } from 'express';
-import { alumnusControllers } from './alumnus.controllers';
-import validateRequest from '../../middlewares/validateRequest';
-import { alumnusValidations } from './alumnus.validation';
 
 const router = Router();
 

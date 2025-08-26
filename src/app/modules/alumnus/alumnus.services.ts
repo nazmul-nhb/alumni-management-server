@@ -1,8 +1,8 @@
-import { ErrorWithStatus } from '../../classes/ErrorWithStatus';
-import { QueryBuilder } from '../../classes/QueryBuilder';
-import { STATUS_CODES } from '../../constants/index';
-import { Alumnus } from './alumnus.model';
-import type { IAlumnus } from './alumnus.types';
+import { ErrorWithStatus } from '@/classes/ErrorWithStatus';
+import { QueryBuilder } from '@/classes/QueryBuilder';
+import { Alumnus } from '@/modules/alumnus/alumnus.model';
+import type { IAlumnus } from '@/modules/alumnus/alumnus.types';
+import { STATUS_CODES } from 'nhb-toolbox/constants';
 
 const createAlumnusInDB = async (payload: IAlumnus) => {
 	const newAlumnus = await Alumnus.create(payload);
@@ -26,14 +26,10 @@ const getSingleAlumnusFromDB = async (id: string) => {
 };
 
 const updateAlumnusInDB = async (id: string, payload: Partial<IAlumnus>) => {
-	const updatedAlumnus = await Alumnus.findOneAndUpdate(
-		{ _id: id },
-		payload,
-		{
-			runValidators: true,
-			new: true,
-		}
-	);
+	const updatedAlumnus = await Alumnus.findOneAndUpdate({ _id: id }, payload, {
+		runValidators: true,
+		new: true,
+	});
 
 	if (!updatedAlumnus) {
 		throw new ErrorWithStatus(

@@ -1,4 +1,4 @@
-import type { TStatusCode } from '../types';
+import type { TStatusCode } from '@/types';
 
 /**
  * @class Create an instance of `Error` with custom properties

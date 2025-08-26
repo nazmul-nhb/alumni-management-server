@@ -1,12 +1,9 @@
+import type { IErrorResponse, IErrorSource } from '@/types/interfaces';
 import { joinArrayElements } from 'nhb-toolbox';
 import type { ZodError } from 'zod';
-import type { IErrorResponse, IErrorSource } from '../types/interfaces';
 
 /** * Processes Zod Validation Errors and returns a structured response. */
-export const handleZodErrors = (
-	error: ZodError,
-	stack?: string
-): IErrorResponse => {
+export const handleZodErrors = (error: ZodError, stack?: string): IErrorResponse => {
 	const errorSource: IErrorSource[] = error.issues.map((zodIssue) => {
 		const path = zodIssue.path.join('.');
 		let message = zodIssue.message;

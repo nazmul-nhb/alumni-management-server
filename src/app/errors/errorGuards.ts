@@ -1,17 +1,10 @@
-import { MongooseError } from 'mongoose';
-import type { CastError } from 'mongoose';
-import type {
-	IDuplicateError,
-	IParserError,
-	INestedError,
-} from '../types/interfaces';
+import type { IDuplicateError, INestedError, IParserError } from '@/types/interfaces';
+import { MongooseError, type CastError } from 'mongoose';
 
 /**
  * Type guard to check if an error is a MongoDB Duplicate Error.
  */
-export const isMongoDuplicateError = (
-	error: unknown
-): error is IDuplicateError => {
+export const isMongoDuplicateError = (error: unknown): error is IDuplicateError => {
 	return (
 		typeof error === 'object' &&
 		error !== null &&
