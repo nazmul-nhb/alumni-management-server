@@ -1,49 +1,11 @@
-import { ErrorWithStatus } from '../../classes/ErrorWithStatus';
 import configs from '../../configs';
-import { STATUS_CODES } from '../../constants';
 import catchAsync from '../../utilities/catchAsync';
-import { generateFileName } from '../../utilities/generateFileName';
 import sendResponse from '../../utilities/sendResponse';
-import { sendImageToCloudinary } from '../../utilities/uploadImage';
-import { User } from '../user/user.model';
-import type { IUser } from '../user/user.types';
 import { authServices } from './auth.services';
 
 /** * Register a new user */
 const registerUser = catchAsync(async (req, res) => {
-	const userToCreate = req.body as IUser;
-
-	const existingUser = await User.findOne({ email: userToCreate.email });
-
-	if (existingUser) {
-		throw new ErrorWithStatus(
-			'Duplicate Error',
-			`User already exists with email: ${userToCreate.email}!`,
-			STATUS_CODES.CONFLICT,
-			'register_user'
-		);
-	}
-
-	if (!req.file) {
-		throw new ErrorWithStatus(
-			'Image Required',
-			`Require image to create new profile!`,
-			STATUS_CODES.BAD_REQUEST,
-			'register_user'
-		);
-	}
-
-	const fileName = generateFileName('user');
-
-	const { secure_url } = await sendImageToCloudinary(
-		fileName,
-		req.file.buffer
-	);
-
-	const user = await authServices.registerUserInDB({
-		...userToCreate,
-		image: secure_url.split(configs.imageBaseUrl)[1],
-	});
+	const user = await authServices.registerUserInDB(req.body);
 
 	sendResponse(res, 'User', 'POST', user, 'User registered successfully!');
 });

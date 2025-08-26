@@ -23,11 +23,9 @@ import type {
 const registerUserInDB = async (payload: IUser) => {
 	const newUser = await User.create(payload);
 
-	const { _id, name, email, image } = newUser.toObject();
+	const { _id, name, email } = newUser.toObject();
 
-	const user = { _id, name, email, image };
-
-	return user;
+	return { _id, name, email };
 };
 
 /**

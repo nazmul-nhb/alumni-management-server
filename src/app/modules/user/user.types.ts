@@ -5,7 +5,6 @@ export interface IUser {
 	name: string;
 	email: TEmail;
 	password: string;
-	image: string;
 	role: TUserRole;
 	is_active?: boolean;
 }
