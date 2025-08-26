@@ -33,7 +33,7 @@ const alumnusSchema = new Schema<IAlumnusDoc>(
 			current_address: { type: String },
 		},
 		academic_info: {
-			student_id: { type: Number || String },
+			student_id: { type: String, required: true, unique: true },
 			degree_earned: {
 				type: String,
 				enum: DEGREES,

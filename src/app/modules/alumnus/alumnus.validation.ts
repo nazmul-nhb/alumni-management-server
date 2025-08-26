@@ -4,6 +4,7 @@ import {
 	GENDERS,
 	PARTICIPATION,
 } from '@/modules/alumnus/alumnus.constants';
+import { createPartialSchema } from '@/utilities/zodPartialSchema';
 import { z } from 'zod';
 
 const personalInfoSchema = z.object({
@@ -27,23 +28,32 @@ const contactInfoSchema = z.object({
 	email: z.email('Invalid email address'),
 	phone: z
 		.string({ error: 'Phone number is required!' })
-		.regex(/^\d+$/, 'Phone must be a numeric string'),
+		.regex(/^\d+$/, 'Phone must be a numeric string!'),
 	current_address: z.string().optional(),
 });
 
 const academicInfoSchema = z.object({
 	student_id: z
-		.union([z.number(), z.string().regex(/^\d+$/, 'Student ID must be numeric')])
-		.transform(Number)
-		.optional(),
+		.union([
+			z
+				.string()
+				.regex(/^\d+$/, 'Student ID must be numeric!')
+				.refine((val) => val.length >= 12, {
+					message: 'Student ID must be at least 12 digits long!',
+				}),
+			z.number().refine((val) => val.toString().length >= 12, {
+				message: 'Student ID must be at least 12 digits long!',
+			}),
+		])
+		.transform((val) => val.toString()),
 	degree_earned: z
 		.enum(DEGREES, {
-			message: 'Invalid degree',
+			message: 'Invalid degree!',
 		})
 		.default('BA'),
 	graduation_year: z
 		.number({ error: 'Graduation year is required!' })
-		.int('Graduation year must be an integer'),
+		.int('Graduation year must be an integer!'),
 	focus_area: z.string().optional(),
 });
 
@@ -60,15 +70,14 @@ const employmentInfoSchema = z
 			.string({ error: 'Work location is required' })
 			.min(1, 'Work location is required'),
 	})
-	.partial()
-	.optional();
+	.partial();
 
 export const creationSchema = z
 	.object({
 		personal_info: personalInfoSchema,
 		contact_info: contactInfoSchema,
 		academic_info: academicInfoSchema,
-		employment_info: employmentInfoSchema,
+		employment_info: employmentInfoSchema.optional(),
 		participation: z.enum(PARTICIPATION, {
 			message: 'Invalid participation type',
 		}),
@@ -78,6 +87,6 @@ export const creationSchema = z
 	})
 	.strict();
 
-const updateSchema = creationSchema.partial();
+const updateSchema = createPartialSchema(creationSchema).strict();
 
 export const alumnusValidations = { creationSchema, updateSchema };

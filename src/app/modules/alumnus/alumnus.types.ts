@@ -6,7 +6,6 @@ import type {
 } from '@/modules/alumnus/alumnus.constants';
 import type { TEmail } from '@/types';
 import type { Document, Model, Types } from 'mongoose';
-import type { Numeric } from 'nhb-toolbox/types';
 
 export interface IAlumnus {
 	personal_info: IPersonalInfo;
@@ -38,7 +37,7 @@ export interface IContactInfo {
 }
 
 export interface IAcademicInfo {
-	student_id?: Numeric;
+	student_id?: `${number}`;
 	degree_earned: TDegree;
 	graduation_year: number;
 	focus_area?: string;
