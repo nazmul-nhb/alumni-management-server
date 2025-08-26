@@ -11,7 +11,7 @@ import type { TCollection } from '../types';
  */
 export const validateObjectId = (
 	id: Types.ObjectId | string,
-	collection: Lowercase<TCollection>,
+	collection: Lowercase<Exclude<TCollection, 'N/A'>>,
 	path: string
 ) => {
 	if (!isValidObjectId(id)) {

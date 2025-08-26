@@ -4,14 +4,14 @@ import { z } from 'zod';
 const creationSchema = z
 	.object({
 		name: z
-			.string({ required_error: 'Title is required!' })
+			.string({ error: 'Title is required!' })
 			.trim()
 			.min(2, { message: 'Name must be at least 2 characters long!' })
 			.refine((value) => /^[A-Z]/.test(value), {
 				message: 'Name must start with a capital letter',
 			}),
-		email: z.string().email(),
-		image: z.any({ required_error: 'Image is required!' }),
+		email: z.email({ error: 'Invalid email address!' }).trim(),
+		image: z.any(),
 		password: z
 			.string()
 			.trim()

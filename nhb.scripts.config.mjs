@@ -10,7 +10,7 @@ import {
 export default defineScriptConfig({
 	format: {
 		args: ['--write'],
-		files: ['.'],
+		files: ['src', 'nhb.scripts.config.mjs'],
 		ignorePath: '.prettierignore',
 	},
 	lint: { folders: ['src'], patterns: ['**/*.ts'] },
