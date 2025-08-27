@@ -33,10 +33,6 @@ export interface IParserError {
 	type: string;
 }
 
-export interface INestedError {
-	errors: Record<string, unknown>;
-}
-
 export interface IErrorSource {
 	path: string | number;
 	message: string;

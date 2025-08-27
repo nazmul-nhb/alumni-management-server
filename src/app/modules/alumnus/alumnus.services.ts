@@ -2,7 +2,9 @@ import { ErrorWithStatus } from '@/classes/ErrorWithStatus';
 import { QueryBuilder } from '@/classes/QueryBuilder';
 import { Alumnus } from '@/modules/alumnus/alumnus.model';
 import type { IAlumnus } from '@/modules/alumnus/alumnus.types';
+import { flattenObjectDotNotation } from 'nhb-toolbox';
 import { STATUS_CODES } from 'nhb-toolbox/constants';
+import type { DeepPartial } from 'nhb-toolbox/utils/types';
 
 const createAlumnusInDB = async (payload: IAlumnus) => {
 	const newAlumnus = await Alumnus.create(payload);
@@ -25,8 +27,10 @@ const getSingleAlumnusFromDB = async (id: string) => {
 	return alumnus;
 };
 
-const updateAlumnusInDB = async (id: string, payload: Partial<IAlumnus>) => {
-	const updatedAlumnus = await Alumnus.findOneAndUpdate({ _id: id }, payload, {
+const updateAlumnusInDB = async (id: string, payload: DeepPartial<IAlumnus>) => {
+	const flattened = flattenObjectDotNotation(payload);
+
+	const updatedAlumnus = await Alumnus.findOneAndUpdate({ _id: id }, flattened, {
 		runValidators: true,
 		new: true,
 	});
