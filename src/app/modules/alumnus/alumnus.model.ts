@@ -14,18 +14,10 @@ const alumnusSchema = new Schema<IAlumnusDoc>(
 		personal_info: {
 			full_name: { type: String, required: true },
 			date_of_birth: { type: String, required: true },
-			gender: {
-				type: String,
-				enum: GENDERS,
-				required: true,
-			},
+			gender: { type: String, enum: GENDERS, required: true },
 			image: { type: String, required: true },
 			nationality: { type: String, required: true },
-			blood_group: {
-				type: String,
-				enum: BLOOD_GROUPS,
-				required: true,
-			},
+			blood_group: { type: String, enum: BLOOD_GROUPS, required: true },
 		},
 		contact_info: {
 			email: { type: String, required: true, unique: true },
@@ -34,12 +26,7 @@ const alumnusSchema = new Schema<IAlumnusDoc>(
 		},
 		academic_info: {
 			student_id: { type: String, required: true, unique: true },
-			degree_earned: {
-				type: String,
-				enum: DEGREES,
-				required: true,
-				default: 'BA',
-			},
+			degree_earned: { type: String, enum: DEGREES, required: true, default: 'BA' },
 			graduation_year: { type: Number, required: true },
 			focus_area: { type: String },
 		},
@@ -57,10 +44,7 @@ const alumnusSchema = new Schema<IAlumnusDoc>(
 		interest: { type: String, required: true },
 	},
 	{
-		timestamps: {
-			createdAt: 'created_at',
-			updatedAt: 'updated_at',
-		},
+		timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' },
 		versionKey: false,
 		collection: 'alumni',
 	}
@@ -76,7 +60,7 @@ alumnusSchema.statics.findAlumnusById = async function (id: string) {
 		);
 	}
 
-	const alumnus = await this.findById(id);
+	const alumnus: IAlumnusDoc = await this.findById(id);
 
 	if (!alumnus) {
 		throw new ErrorWithStatus(

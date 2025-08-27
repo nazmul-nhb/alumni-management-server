@@ -1,5 +1,6 @@
 import { corsOptions } from '@/configs/cors';
 import { catchAllErrors, handleRouteNotFound } from '@/middlewares/errorHandlers';
+import { requestLogger } from '@/middlewares/requestLogger';
 import router from '@/routes';
 import sendResponse from '@/utilities/sendResponse';
 import cookieParser from 'cookie-parser';
@@ -17,6 +18,8 @@ app.use(cors(corsOptions));
 app.use(cookieParser());
 // * Use JSON Parser
 app.use(express.json());
+// * Use custom logger
+app.use(requestLogger);
 
 // * Root/Test Route
 app.get(['/', '/api'], (_req: Request, res: Response) => {

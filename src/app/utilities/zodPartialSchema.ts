@@ -34,7 +34,7 @@ const deepPartial = (schema: ZodType): ZodType => {
 	}
 
 	// Fallback (primitives, enums, literals, etc.)
-	return schema;
+	return schema.optional();
 };
 
 /** - Represents a Zod object shape (i.e., the `.shape` property of a ZodObject). */

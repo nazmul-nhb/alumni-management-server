@@ -7,20 +7,29 @@ import {
 import { createPartialSchema } from '@/utilities/zodPartialSchema';
 import { z } from 'zod';
 
+const currentYear = new Date().getFullYear();
+
 const personalInfoSchema = z.object({
-	full_name: z.string({ error: 'Full name is required' }).min(1, 'Full name is required'),
+	full_name: z
+		.string({ error: 'Full name is required' })
+		.min(1, 'Full name cannot be empty!'),
 	date_of_birth: z
 		.string({ error: 'Date of birth is required' })
-		.min(1, 'Date of birth is required'),
+		.regex(/^\d{4}-\d{2}-\d{2}$/, {
+			error: 'Date of birth must be in YYYY-MM-DD format',
+		})
+		.refine((val) => !isNaN(Date.parse(val)), {
+			error: 'Date of birth must be a valid date',
+		}),
 	gender: z.enum(GENDERS, {
-		message: 'Invalid gender',
+		error: 'Invalid gender',
 	}),
 	image: z.url({ error: 'Valid image URL is required' }),
 	nationality: z
 		.string({ error: 'Nationality is required' })
 		.min(1, 'Nationality is required'),
 	blood_group: z.enum(BLOOD_GROUPS, {
-		message: 'Invalid blood group',
+		error: 'Invalid blood group',
 	}),
 });
 
@@ -28,7 +37,18 @@ const contactInfoSchema = z.object({
 	email: z.email('Invalid email address'),
 	phone: z
 		.string({ error: 'Phone number is required!' })
-		.regex(/^\d+$/, 'Phone must be a numeric string!'),
+		.trim()
+		.transform((val) => val.replace(/[\s\-().]/g, ''))
+		.check((val) => {
+			if (!/^\+?[0-9]\d{1,14}$/.test(val.value)) {
+				val.issues.push({
+					code: 'custom',
+					error: 'Invalid Phone Number',
+					message: 'Please provide a valid phone number!',
+					input: val.value,
+				});
+			}
+		}),
 	current_address: z.string().optional(),
 });
 
@@ -39,21 +59,23 @@ const academicInfoSchema = z.object({
 				.string()
 				.regex(/^\d+$/, 'Student ID must be numeric!')
 				.refine((val) => val.length >= 12, {
-					message: 'Student ID must be at least 12 digits long!',
+					error: 'Student ID must be at least 12 digits long!',
 				}),
 			z.number().refine((val) => val.toString().length >= 12, {
-				message: 'Student ID must be at least 12 digits long!',
+				error: 'Student ID must be at least 12 digits long!',
 			}),
 		])
 		.transform((val) => val.toString()),
 	degree_earned: z
 		.enum(DEGREES, {
-			message: 'Invalid degree!',
+			error: 'Invalid degree!',
 		})
 		.default('BA'),
 	graduation_year: z
 		.number({ error: 'Graduation year is required!' })
-		.int('Graduation year must be an integer!'),
+		.int({ error: 'Graduation year must be an integer!' })
+		.min(2002, { error: 'Graduation year must be 2002 or later!' })
+		.max(currentYear, { error: `Graduation year cannot be after ${currentYear}!` }),
 	focus_area: z.string().optional(),
 });
 
@@ -79,7 +101,7 @@ export const creationSchema = z
 		academic_info: academicInfoSchema,
 		employment_info: employmentInfoSchema.optional(),
 		participation: z.enum(PARTICIPATION, {
-			message: 'Invalid participation type',
+			error: 'Invalid participation type',
 		}),
 		interest: z
 			.string({ error: 'Interest is required' })
