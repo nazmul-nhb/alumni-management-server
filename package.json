@@ -1,6 +1,6 @@
 {
   "name": "alumni-management-server",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "description": "Server for Alumni Management System",
   "main": "dist/server.js",
   "scripts": {
@@ -67,7 +67,7 @@
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.18.0",
-    "nhb-toolbox": "^4.14.14",
+    "nhb-toolbox": "^4.14.16",
     "zod": "^4.1.3"
   }
 }
