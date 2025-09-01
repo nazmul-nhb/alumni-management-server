@@ -1,9 +1,9 @@
-import chalk from 'chalk';
-import type { ErrorRequestHandler, RequestHandler } from 'express';
 import { ErrorWithStatus } from '@/classes/ErrorWithStatus';
 import configs from '@/configs';
 import processErrors from '@/errors/processErrors';
+import type { ErrorRequestHandler, RequestHandler } from 'express';
 import { STATUS_CODES } from 'nhb-toolbox/constants';
+import { Stylog } from 'nhb-toolbox/stylog';
 
 /** * Middleware to Handle "Route Not Found" Errors.*/
 export const handleRouteNotFound: RequestHandler = (req, _res, next) => {
@@ -22,12 +22,12 @@ export const catchAllErrors: ErrorRequestHandler = (err, _req, res, next) => {
 	const { statusCode, name, errorSource, stack } = processErrors(err);
 
 	// * Log error msg in the server console
-	console.error(chalk.redBright.bold('🛑 Error(s) Occurred:'));
+	console.error(Stylog.error.bold.string('🛑 Error(s) Occurred:'));
 	errorSource.forEach((err) => {
-		console.error(chalk.redBright(`	➡ ${err.message}`));
+		console.error(Stylog.error.string(`	➡ ${err.message}`));
 	});
 
-	console.error(chalk.redBright(`🛑 ${err}`));
+	console.error(Stylog.warning.string(`🛑 ${err}`));
 
 	// * Delegate to the default Express error handler
 	// ? if the headers have already been sent to the client
