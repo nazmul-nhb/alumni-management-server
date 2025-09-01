@@ -1,7 +1,7 @@
 import configs from '@/configs';
 import { connectDB } from '@/configs/db';
+import chalk from 'chalk';
 import type { Server } from 'http';
-import { Stylog } from 'nhb-toolbox/stylog';
 import app from './app';
 
 let server: Server;
@@ -13,13 +13,15 @@ const bootStrap = async () => {
 
 		// Listen to the Server
 		server = app.listen(configs.port, () => {
-			Stylog.yellow.log(`👂 Server is Listening on Port: ${configs.port}`);
+			console.info(
+				chalk.yellowBright(`👂 Server is Listening on Port: ${configs.port}`)
+			);
 		});
 	} catch (error) {
 		if (error instanceof Error) {
-			Stylog.error.log(`🚫 Error Occurred: ${error.message}`);
+			console.error(chalk.red(`🚫 Error Occurred: ${error.message}`));
 		} else {
-			Stylog.error.log('🛑 Unknown Error Occurred!');
+			console.error(chalk.red('🛑 Unknown Error Occurred!'));
 		}
 	}
 };
@@ -27,7 +29,9 @@ const bootStrap = async () => {
 bootStrap().catch(console.dir);
 
 process.on('unhandledRejection', () => {
-	Stylog.error.log(`🚫 Unhandled Rejection Detected!\n🛑 Server is Shutting Down...`);
+	console.error(
+		chalk.redBright(`🚫 Unhandled Rejection Detected!\n🛑 Server is Shutting Down...`)
+	);
 
 	if (server) {
 		server.close(() => {
@@ -39,7 +43,9 @@ process.on('unhandledRejection', () => {
 });
 
 process.on('uncaughtException', () => {
-	Stylog.error.log(`🚫 Uncaught Exception Detected!\n🛑 Server is Shutting Down...`);
+	console.error(
+		chalk.redBright(`🚫 Uncaught Exception Detected!\n🛑 Server is Shutting Down...`)
+	);
 
 	process.exit(1);
 });
