@@ -5,11 +5,10 @@ import router from '@/routes';
 import sendResponse from '@/utilities/sendResponse';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
-import type { Application, Request, Response } from 'express';
 import express from 'express';
 
 // * Create an Express App
-const app: Application = express();
+const app = express();
 
 // * Respect CORS Policy
 app.use(cors(corsOptions));
@@ -22,7 +21,7 @@ app.use(express.json());
 app.use(requestLogger);
 
 // * Root/Test Route
-app.get(['/', '/api'], (_req: Request, res: Response) => {
+app.get(['/', '/api'], (_req, res) => {
 	sendResponse(res, 'N/A', 'OK', null, 'Alumni Server is Running! 🏃');
 });
 
