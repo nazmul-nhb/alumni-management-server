@@ -30,8 +30,8 @@ importers:
         specifier: ^8.18.0
         version: 8.18.0
       nhb-toolbox:
-        specifier: ^4.20.16
-        version: 4.20.16
+        specifier: ^4.20.17
+        version: 4.20.17
       zod:
         specifier: ^4.1.5
         version: 4.1.5
@@ -82,11 +82,11 @@ importers:
         specifier: ^9.1.7
         version: 9.1.7
       lint-staged:
-        specifier: ^16.1.5
-        version: 16.1.5
+        specifier: ^16.1.6
+        version: 16.1.6
       nhb-scripts:
-        specifier: ^1.8.58
-        version: 1.8.58
+        specifier: ^1.8.64
+        version: 1.8.64
       nodemon:
         specifier: ^3.1.10
         version: 3.1.10
@@ -1443,8 +1443,8 @@ packages:
     resolution: {integrity: sha512-/vlFKAoH5Cgt3Ie+JLhRbwOsCQePABiU3tJ1egGvyQ+33R/vcwM2Zl2QR/LzjsBeItPt3oSVXapn+m4nQDvpzw==}
     engines: {node: '>=14'}
 
-  lint-staged@16.1.5:
-    resolution: {integrity: sha512-uAeQQwByI6dfV7wpt/gVqg+jAPaSp8WwOA8kKC/dv1qw14oGpnpAisY65ibGHUGDUv0rYaZ8CAJZ/1U8hUvC2A==}
+  lint-staged@16.1.6:
+    resolution: {integrity: sha512-U4kuulU3CKIytlkLlaHcGgKscNfJPNTiDF2avIUGFCv7K95/DCYQ7Ra62ydeRWmgQGg9zJYw2dzdbztwJlqrow==}
     engines: {node: '>=20.17'}
     hasBin: true
 
@@ -1660,13 +1660,13 @@ packages:
     resolution: {integrity: sha512-8Ofs/AUQh8MaEcrlq5xOX0CQ9ypTF5dl78mjlMNfOK08fzpgTHQRQPBxcPlEtIw0yRpws+Zo/3r+5WRby7u3Gg==}
     engines: {node: '>= 0.6'}
 
-  nhb-scripts@1.8.58:
-    resolution: {integrity: sha512-LvftfC1JZbryk8yutcuq5eSO6u0kHSMndbmESN+0AfpDxFYU/DvnfoolIPbot7IppnLks/chOWE9oMHkAQuMow==}
+  nhb-scripts@1.8.64:
+    resolution: {integrity: sha512-2vvYttbiwRjflcHsvXVnz4Hi+a1XzpPrkAJYg8PPKYvQeMEA1gT1xgSb/LxPbkQCLFVLdFKm2RTlXn2RXGIF6Q==}
     engines: {node: '>=18'}
     hasBin: true
 
-  nhb-toolbox@4.20.16:
-    resolution: {integrity: sha512-IifI/ddRkdMMQb+7Mbcs/teDsVQHTgzCj9tYqD3r5q4Hw2cep7IoFI7beLWKENWVjZUHexzH5ebrmXxsWJGxvg==}
+  nhb-toolbox@4.20.17:
+    resolution: {integrity: sha512-UMrcDZn6v/NsbQdBDDpSDuTFnhy4OwvB/kY9Q+sM5k8OlhjRsjr7juqIyl3GNT2CNygzUNlS9uE7RS2AK5OHNA==}
 
   node-addon-api@8.5.0:
     resolution: {integrity: sha512-/bRZty2mXUIFY/xU5HLvveNHlswNJej+RnxBjOMkidWfwZzgTbPG1E3K5TOxRLOR+5hX7bSofy8yf1hZevMS8A==}
@@ -1683,6 +1683,15 @@ packages:
 
   node-fetch@2.6.9:
     resolution: {integrity: sha512-DJm/CJkZkRjKKj4Zi4BsKVZh3ValV5IR5s7LVZnW+6YMh0W1BfNA8XSs6DLMGYlId5F3KnA70uu2qepcR08Qqg==}
+    engines: {node: 4.x || >=6.0.0}
+    peerDependencies:
+      encoding: ^0.1.0
+    peerDependenciesMeta:
+      encoding:
+        optional: true
+
+  node-fetch@2.7.0:
+    resolution: {integrity: sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==}
     engines: {node: 4.x || >=6.0.0}
     peerDependencies:
       encoding: ^0.1.0
@@ -2516,7 +2525,7 @@ snapshots:
       consola: 3.4.2
       detect-libc: 2.0.4
       https-proxy-agent: 7.0.6
-      node-fetch: 2.6.9
+      node-fetch: 2.7.0
       nopt: 8.1.0
       semver: 7.7.2
       tar: 7.4.3
@@ -3833,7 +3842,7 @@ snapshots:
 
   lilconfig@3.1.3: {}
 
-  lint-staged@16.1.5:
+  lint-staged@16.1.6:
     dependencies:
       chalk: 5.6.0
       commander: 14.0.0
@@ -4021,21 +4030,21 @@ snapshots:
 
   negotiator@1.0.0: {}
 
-  nhb-scripts@1.8.58:
+  nhb-scripts@1.8.64:
     dependencies:
       '@clack/prompts': 0.11.0
       chalk: 5.6.0
       execa: 9.6.0
       globby: 14.1.0
       minimist: 1.2.8
-      nhb-toolbox: 4.20.16
+      nhb-toolbox: 4.20.17
       progress-estimator: 0.3.1
       rimraf: 6.0.1
       semver: 7.7.2
       type-fest: 4.41.0
       typescript: 5.9.2
 
-  nhb-toolbox@4.20.16: {}
+  nhb-toolbox@4.20.17: {}
 
   node-addon-api@8.5.0: {}
 
@@ -4044,6 +4053,10 @@ snapshots:
       whatwg-url: 5.0.0
 
   node-fetch@2.6.9:
+    dependencies:
+      whatwg-url: 5.0.0
+
+  node-fetch@2.7.0:
     dependencies:
       whatwg-url: 5.0.0
 
