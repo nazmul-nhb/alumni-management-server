@@ -22,12 +22,12 @@ export const catchAllErrors: ErrorRequestHandler = (err, _req, res, next) => {
 	const { statusCode, name, errorSource, stack } = processErrors(err);
 
 	// * Log error msg in the server console
-	console.error(Stylog.error.bold.string('🛑 Error(s) Occurred:'));
+	console.error(Stylog.error.bold.toANSI('🛑 Error(s) Occurred:'));
 	errorSource.forEach((err) => {
-		console.error(Stylog.error.string(`	➡ ${err.message}`));
+		console.error(Stylog.error.toANSI(`	➡ ${err.message}`));
 	});
 
-	console.error(Stylog.warning.string(`🛑 ${err}`));
+	console.error(Stylog.warning.toANSI(`🛑 ${err}`));
 
 	// * Delegate to the default Express error handler
 	// ? if the headers have already been sent to the client
